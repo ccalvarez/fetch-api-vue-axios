@@ -10,13 +10,16 @@
 <body>
   <div class="container" id="app">
     <h3 class="text-center">VueNews</h3>
-    <div class="columns medium-3" v-for="result in results">
-      <div class="card">
-        <div class="card-divider">
-          {{ result.title }}
-        </div>
-        <div class="card-section">
-          <p>{{ result.abstract }}.</p>
+    <div class="row" v-for="posts in processedPosts">
+      <div class="columns large-3 medium-6" v-for="post in posts">
+        <div class="card">
+          <div class="card-divider">
+            {{ post.title }}
+          </div>
+          <a :href="post.url" target="_blank"><img :src="post.image_url"></a>
+          <div class="card-section">
+            <p>{{ post.abstract }}.</p>
+          </div>
         </div>
       </div>
     </div>
