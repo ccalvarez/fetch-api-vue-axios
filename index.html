@@ -15,21 +15,7 @@
 <body>
   <div v-cloak class="container" id="app">
     <h3 class="text-center">VueNews</h3>
-    <div class="row" v-for="posts in processedPosts">
-      <div class="columns large-3 medium-6" v-for="post in posts">
-        <div class="card">
-          <!--<div v-text="post.title" class="card-divider">-->
-          <div class="card-divider">
-            {{ post.title }}
-          </div>
-          <a :href="post.url" target="_blank"><img :src="post.image_url"></a>
-          <div class="card-section">
-            <p>{{ post.abstract }}.</p>
-            <!--<p v-text="post.abstract"></p>-->
-          </div>
-        </div>
-      </div>
-    </div>
+    <news-list :results="results"></news-list>
   </div>
   <script src="https://unpkg.com/vue"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
