@@ -1,3 +1,5 @@
+const SECTIONS = "home, arts, automobiles, books, business, fashion, food, health, insider, magazine, movies, national, nyregion, obituaries, opinion, politics, realestate, science, sports, sundayreview, technology, theater, tmagazine, travel, upshot, world"; // From NYTimes
+
 const NYTBaseUrl = "https://api.nytimes.com/svc/topstories/v2/";
 const ApiKey = "your-api-key";
 
@@ -47,16 +49,24 @@ Vue.component('news-list', {
 const vm = new Vue({
   el: '#app',
   data: {
-    results: []
+    results: [],
+    sections: SECTIONS.split(', '), // create an array of the sections
+    section: 'home', // set default section to 'home'
+    loading: true,
+    title: ''
   },
   mounted() {
-    this.getPosts('home');
+    this.getPosts(this.section);
   },
   methods: {
     getPosts(section) {
+      this.loading = true;
       let url = buildUrl(section);
       axios.get(url).then(response => {
+        this.loading = false;
         this.results = response.data.results;
+        let title = this.section !== 'home' ? "Top stories in '" + this.section + "' today " : "Top stories today ";
+        this.title = title + "(" + response.data.num_results + ")";
       }).catch(error => { console.log(error); });
     }
   }
