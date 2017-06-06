@@ -6,19 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>The greatest news app ever</title>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+</style>
 </head>
 <body>
-  <div class="container" id="app">
+  <div v-cloak class="container" id="app">
     <h3 class="text-center">VueNews</h3>
     <div class="row" v-for="posts in processedPosts">
       <div class="columns large-3 medium-6" v-for="post in posts">
         <div class="card">
+          <!--<div v-text="post.title" class="card-divider">-->
           <div class="card-divider">
             {{ post.title }}
           </div>
           <a :href="post.url" target="_blank"><img :src="post.image_url"></a>
           <div class="card-section">
             <p>{{ post.abstract }}.</p>
+            <!--<p v-text="post.abstract"></p>-->
           </div>
         </div>
       </div>
